@@ -20,6 +20,10 @@ msgid "Site Extensions Snapshot"
 msgstr ""
 
 #. Plugin URI of the plugin
+#: site-extensions-snapshot.php
+msgid "https://wordpress.org/plugins/site-extensions-snapshot/"
+msgstr ""
+
 #. Author URI of the plugin
 #: site-extensions-snapshot.php
 msgid "https://zignites.com"

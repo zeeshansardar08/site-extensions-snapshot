@@ -47,13 +47,13 @@ Benefits:
 
 ```php
 // Filter plugin data before display
-add_filter( 'ptdm_plugins_data', 'my_custom_plugin_filter' );
+add_filter( 'sesnap_plugins_data', 'my_custom_plugin_filter' );
 
 // Filter theme data before display
-add_filter( 'ptdm_themes_data', 'my_custom_theme_filter' );
+add_filter( 'sesnap_themes_data', 'my_custom_theme_filter' );
 
 // Modify CSV export data
-add_filter( 'ptdm_csv_data', 'my_custom_csv_filter', 10, 3 );
+add_filter( 'sesnap_csv_data', 'my_custom_csv_filter', 10, 3 );
 ```
 
 ## Internationalization

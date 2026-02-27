@@ -1,6 +1,7 @@
 <?php
 /**
  * Plugin Name: Site Extensions Snapshot
+ * Plugin URI:  https://wordpress.org/plugins/site-extensions-snapshot/
  * Description: A comprehensive dashboard to view and export all installed plugins and themes with their status information.
  * Version: 1.0.0
  * Author: Zignites
@@ -13,7 +14,7 @@
  * Tested up to: 6.9
  * Requires PHP: 7.4
  *
- * @package PluginThemeDashboardManager
+ * @package SiteExtensionsSnapshot
  * @since 1.0.0
  */
 
@@ -23,17 +24,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants
-define( 'PTDM_VERSION', '1.0.0' );
-define( 'PTDM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'PTDM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'PTDM_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'SESNAP_VERSION', '1.0.0' );
+define( 'SESNAP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'SESNAP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'SESNAP_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
  * Main Plugin Class
  *
  * @since 1.0.0
  */
-class Plugin_Theme_Dashboard_Manager {
+class Site_Extensions_Snapshot {
 
     /**
      * Constructor
@@ -50,10 +51,10 @@ class Plugin_Theme_Dashboard_Manager {
      * @since 1.0.0
      */
     public function init() {
-        // Load required files
+        // Load required files.
         $this->load_dependencies();
-        
-        // Initialize admin functionality
+
+        // Initialize admin functionality.
         if ( is_admin() ) {
             $this->init_admin();
         }
@@ -65,8 +66,8 @@ class Plugin_Theme_Dashboard_Manager {
      * @since 1.0.0
      */
     private function load_dependencies() {
-        require_once PTDM_PLUGIN_DIR . 'includes/admin-page.php';
-        require_once PTDM_PLUGIN_DIR . 'includes/csv-export.php';
+        require_once SESNAP_PLUGIN_DIR . 'includes/admin-page.php';
+        require_once SESNAP_PLUGIN_DIR . 'includes/csv-export.php';
     }
 
     /**
@@ -75,8 +76,8 @@ class Plugin_Theme_Dashboard_Manager {
      * @since 1.0.0
      */
     private function init_admin() {
-        new PTDM_Admin_Page();
-        new PTDM_CSV_Export();
+        new Sesnap_Admin_Page();
+        new Sesnap_CSV_Export();
     }
 
 
@@ -91,11 +92,8 @@ class Plugin_Theme_Dashboard_Manager {
             return;
         }
 
-        // Add activation timestamp
-        add_option( 'ptdm_activated', time() );
-        
-        // Flush rewrite rules
-        flush_rewrite_rules();
+        // Add activation timestamp.
+        add_option( 'sesnap_activated', time() );
     }
 
     /**
@@ -104,22 +102,19 @@ class Plugin_Theme_Dashboard_Manager {
      * @since 1.0.0
      */
     public static function deactivate() {
-        // Check if user has proper permissions
+        // Check if user has proper permissions.
         if ( ! current_user_can( 'activate_plugins' ) ) {
             return;
         }
-
-        // Flush rewrite rules
-        flush_rewrite_rules();
     }
 }
 
-// Initialize the plugin
-$ptdm_plugin = new Plugin_Theme_Dashboard_Manager();
+// Initialize the plugin.
+$sesnap_plugin = new Site_Extensions_Snapshot();
 
-// Register activation and deactivation hooks
-register_activation_hook( __FILE__, array( 'Plugin_Theme_Dashboard_Manager', 'activate' ) );
-register_deactivation_hook( __FILE__, array( 'Plugin_Theme_Dashboard_Manager', 'deactivate' ) ); 
+// Register activation and deactivation hooks.
+register_activation_hook( __FILE__, array( 'Site_Extensions_Snapshot', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'Site_Extensions_Snapshot', 'deactivate' ) ); 
 
 
 
