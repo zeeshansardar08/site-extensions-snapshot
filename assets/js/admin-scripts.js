@@ -1,7 +1,7 @@
 ﻿/**
  * Site Extensions Snapshot - Admin Scripts
  *
- * @package PluginThemeDashboardManager
+ * @package SiteExtensionsSnapshot
  * @since 1.0.0
  */
 
@@ -11,7 +11,7 @@
     /**
      * Main Admin Scripts Class
      */
-    var PTDMAdmin = {
+    var SesnapAdmin = {
 
         /**
          * Initialize the admin scripts
@@ -26,18 +26,18 @@
          */
         bindEvents: function() {
             // Export button click handler
-            $(document).on('click', '.ptdm-export-section .button', function(e) {
-                PTDMAdmin.handleExportClick(e);
+            $(document).on('click', '.sesnap-export-section .button', function(e) {
+                SesnapAdmin.handleExportClick(e);
             });
 
             // Tab navigation
             $(document).on('click', '.nav-tab-wrapper .nav-tab', function(e) {
-                PTDMAdmin.handleTabClick(e);
+                SesnapAdmin.handleTabClick(e);
             });
 
             // Keyboard navigation
             $(document).on('keydown', function(e) {
-                PTDMAdmin.handleKeyboardNavigation(e);
+                SesnapAdmin.handleKeyboardNavigation(e);
             });
         },
 
@@ -51,19 +51,19 @@
             var $form = $button.closest('form');
             
             // Add loading state
-            $button.addClass('ptdm-loading');
+            $button.addClass('sesnap-loading');
             $button.prop('disabled', true);
             
             // Update button text
             var originalText = $button.html();
-            $button.html('<span class="dashicons dashicons-update"></span> ' + ptdm_ajax.strings.exporting);
+            $button.html('<span class="dashicons dashicons-update"></span> ' + sesnap_ajax.strings.exporting);
             
             // Submit form
             $form.submit();
             
             // Reset button after a delay (in case of error)
             setTimeout(function() {
-                $button.removeClass('ptdm-loading');
+                $button.removeClass('sesnap-loading');
                 $button.prop('disabled', false);
                 $button.html(originalText);
             }, 5000);
@@ -79,7 +79,7 @@
             var targetTab = $tab.attr('href').split('tab=')[1];
             
             // Store current tab in session storage
-            sessionStorage.setItem('ptdm_current_tab', targetTab);
+            sessionStorage.setItem('sesnap_current_tab', targetTab);
         },
 
         /**
@@ -91,7 +91,7 @@
             // Ctrl/Cmd + E for export
             if ((e.ctrlKey || e.metaKey) && e.keyCode === 69) {
                 e.preventDefault();
-                $('.ptdm-export-section .button').click();
+                $('.sesnap-export-section .button').click();
             }
             
             // Ctrl/Cmd + 1 for plugins tab
@@ -112,15 +112,15 @@
          */
         initTooltips: function() {
             // Add tooltips to status indicators
-            $('.ptdm-status').each(function() {
+            $('.sesnap-status').each(function() {
                 var $status = $(this);
                 var status = $status.text().toLowerCase();
                 var tooltip = '';
                 
                 if (status === 'active') {
-                    tooltip = ptdm_ajax.strings.tooltip_active;
+                    tooltip = sesnap_ajax.strings.tooltip_active;
                 } else if (status === 'inactive') {
-                    tooltip = ptdm_ajax.strings.tooltip_inactive;
+                    tooltip = sesnap_ajax.strings.tooltip_inactive;
                 }
                 
                 if (tooltip) {
@@ -138,7 +138,7 @@
         showNotification: function(message, type) {
             type = type || 'success';
             
-            var $notice = $('<div class="ptdm-notice ptdm-notice-' + type + '">' + message + '</div>');
+            var $notice = $('<div class="sesnap-notice sesnap-notice-' + type + '">' + message + '</div>');
             
             $('.wrap h1').after($notice);
             
@@ -189,17 +189,17 @@
          * Search functionality
          */
         initSearch: function() {
-            var $searchInput = $('.ptdm-export-section .ptdm-search');
+            var $searchInput = $('.sesnap-export-section .sesnap-search');
             if (!$searchInput.length) {
                 return;
             }
 
-            $searchInput.attr('placeholder', ptdm_ajax.strings.search_placeholder);
+            $searchInput.attr('placeholder', sesnap_ajax.strings.search_placeholder);
             
             var debouncedSearch = this.debounce(function() {
                 var searchTerm = $searchInput.val().toLowerCase();
                 
-                $('.ptdm-table-container tbody tr').each(function() {
+                $('.sesnap-table-container tbody tr').each(function() {
                     var $row = $(this);
                     var text = $row.text().toLowerCase();
                     
@@ -218,15 +218,15 @@
          * Initialize responsive table
          */
         initResponsiveTable: function() {
-            var $tables = $('.ptdm-table-container table');
+            var $tables = $('.sesnap-table-container table');
             
             $tables.each(function() {
                 var $table = $(this);
-                var $wrapper = $table.closest('.ptdm-table-container');
+                var $wrapper = $table.closest('.sesnap-table-container');
                 
                 // Add responsive wrapper if not exists
-                if (!$wrapper.hasClass('ptdm-responsive')) {
-                    $wrapper.addClass('ptdm-responsive');
+                if (!$wrapper.hasClass('sesnap-responsive')) {
+                    $wrapper.addClass('sesnap-responsive');
                 }
             });
         },
@@ -235,15 +235,15 @@
          * Initialize sortable tables
          */
         initSortableTables: function() {
-            $('.ptdm-table-container th').each(function() {
+            $('.sesnap-table-container th').each(function() {
                 var $th = $(this);
                 var columnIndex = $th.index();
                 
                 $th.css('cursor', 'pointer');
-                $th.append('<span class="dashicons dashicons-arrow-up-alt2 ptdm-sort-icon"></span>');
+                $th.append('<span class="dashicons dashicons-arrow-up-alt2 sesnap-sort-icon"></span>');
                 
                 $th.on('click', function() {
-                    PTDMAdmin.sortTable($th.closest('table'), columnIndex);
+                    SesnapAdmin.sortTable($th.closest('table'), columnIndex);
                 });
             });
         },
@@ -278,8 +278,8 @@
             $table.data('sort-direction', sortDirection);
             
             // Update sort icons
-            $table.find('.ptdm-sort-icon').removeClass('dashicons-arrow-up-alt2 dashicons-arrow-down-alt2');
-            $table.find('th').eq(columnIndex).find('.ptdm-sort-icon').addClass(
+            $table.find('.sesnap-sort-icon').removeClass('dashicons-arrow-up-alt2 dashicons-arrow-down-alt2');
+            $table.find('th').eq(columnIndex).find('.sesnap-sort-icon').addClass(
                 sortDirection === 'asc' ? 'dashicons-arrow-up-alt2' : 'dashicons-arrow-down-alt2'
             );
         }
@@ -289,10 +289,10 @@
      * Initialize when document is ready
      */
     $(document).ready(function() {
-        PTDMAdmin.init();
+        SesnapAdmin.init();
         
-        // Restore current tab from session storage
-        var currentTab = sessionStorage.getItem('ptdm_current_tab');
+        // Restore current tab from session storage.
+        var currentTab = sessionStorage.getItem('sesnap_current_tab');
         if (currentTab) {
             var $tab = $('.nav-tab-wrapper .nav-tab[href*="tab=' + currentTab + '"]');
             if ($tab.length) {
@@ -300,10 +300,10 @@
             }
         }
         
-        // Initialize additional features
-        PTDMAdmin.initSearch();
-        PTDMAdmin.initResponsiveTable();
-        PTDMAdmin.initSortableTables();
+        // Initialize additional features.
+        SesnapAdmin.initSearch();
+        SesnapAdmin.initResponsiveTable();
+        SesnapAdmin.initSortableTables();
     });
 
 })(jQuery); 

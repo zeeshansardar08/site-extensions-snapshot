@@ -1,12 +1,12 @@
 ﻿/**
  * Site Extensions Snapshot - Admin Styles
  *
- * @package PluginThemeDashboardManager
+ * @package SiteExtensionsSnapshot
  * @since 1.0.0
  */
 
 /* Export Section */
-.ptdm-export-section {
+.sesnap-export-section {
     margin: 20px 0;
     padding: 15px;
     background: #fff;
@@ -19,19 +19,19 @@
     gap: 16px;
 }
 
-.ptdm-export-section .button {
+.sesnap-export-section .button {
     display: inline-flex;
     align-items: center;
     gap: 5px;
 }
 
-.ptdm-export-section .dashicons {
+.sesnap-export-section .dashicons {
     font-size: 16px;
     width: 16px;
     height: 16px;
 }
 
-.ptdm-search-wrap {
+.sesnap-search-wrap {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -44,11 +44,11 @@
     flex: 1 1 320px;
 }
 
-.ptdm-search-wrap .dashicons {
+.sesnap-search-wrap .dashicons {
     color: #2271b1;
 }
 
-.ptdm-search-wrap .ptdm-search {
+.sesnap-search-wrap .sesnap-search {
     border: none;
     background: transparent;
     width: 100%;
@@ -58,7 +58,7 @@
 }
 
 /* Tab Navigation */
-.nav-tab-wrapper .ptdm-count {
+.nav-tab-wrapper .sesnap-count {
     font-size: 11px;
     color: #666;
     font-weight: normal;
@@ -66,12 +66,12 @@
 }
 
 /* Content Area */
-.ptdm-content {
+.sesnap-content {
     margin-top: 20px;
 }
 
 /* Table Container */
-.ptdm-table-container {
+.sesnap-table-container {
     background: #fff;
     border: 1px solid #ccd0d4;
     border-radius: 4px;
@@ -79,29 +79,29 @@
     overflow: hidden;
 }
 
-.ptdm-table-container table {
+.sesnap-table-container table {
     margin: 0;
     border: none;
 }
 
-.ptdm-table-container th {
+.sesnap-table-container th {
     background: #f9f9f9;
     border-bottom: 1px solid #ccd0d4;
     font-weight: 600;
     color: #23282d;
 }
 
-.ptdm-table-container td {
+.sesnap-table-container td {
     border-bottom: 1px solid #f0f0f1;
     vertical-align: top;
 }
 
-.ptdm-table-container tr:last-child td {
+.sesnap-table-container tr:last-child td {
     border-bottom: none;
 }
 
 /* Status Indicators */
-.ptdm-status {
+.sesnap-status {
     display: inline-block;
     padding: 3px 8px;
     border-radius: 3px;
@@ -111,58 +111,58 @@
     letter-spacing: 0.5px;
 }
 
-.ptdm-status-active {
+.sesnap-status-active {
     background: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
 }
 
-.ptdm-status-inactive {
+.sesnap-status-inactive {
     background: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
 
 /* Description Column */
-.ptdm-table-container td:last-child {
+.sesnap-table-container td:last-child {
     max-width: 300px;
     word-wrap: break-word;
 }
 
 /* Responsive Design */
 @media screen and (max-width: 782px) {
-    .ptdm-table-container {
+    .sesnap-table-container {
         overflow-x: auto;
     }
     
-    .ptdm-table-container table {
+    .sesnap-table-container table {
         min-width: 600px;
     }
     
-    .ptdm-table-container th,
-    .ptdm-table-container td {
+    .sesnap-table-container th,
+    .sesnap-table-container td {
         padding: 8px 6px;
         font-size: 13px;
     }
     
-    .ptdm-table-container td:last-child {
+    .sesnap-table-container td:last-child {
         max-width: 200px;
     }
 }
 
 @media screen and (max-width: 600px) {
-    .ptdm-export-section {
+    .sesnap-export-section {
         text-align: center;
         flex-direction: column;
         align-items: stretch;
     }
     
-    .ptdm-export-section .button {
+    .sesnap-export-section .button {
         width: 100%;
         justify-content: center;
     }
 
-    .ptdm-search-wrap {
+    .sesnap-search-wrap {
         max-width: none;
         min-width: 0;
     }
@@ -179,12 +179,12 @@
 }
 
 /* Loading State */
-.ptdm-loading {
+.sesnap-loading {
     opacity: 0.6;
     pointer-events: none;
 }
 
-.ptdm-loading::after {
+.sesnap-loading::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -195,69 +195,69 @@
     border: 2px solid #f3f3f3;
     border-top: 2px solid #0073aa;
     border-radius: 50%;
-    animation: ptdm-spin 1s linear infinite;
+    animation: sesnap-spin 1s linear infinite;
 }
 
-@keyframes ptdm-spin {
+@keyframes sesnap-spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
 /* Success/Error Messages */
-.ptdm-notice {
+.sesnap-notice {
     padding: 10px 15px;
     margin: 15px 0;
     border-radius: 4px;
     border-left: 4px solid;
 }
 
-.ptdm-notice-success {
+.sesnap-notice-success {
     background: #d4edda;
     border-color: #28a745;
     color: #155724;
 }
 
-.ptdm-notice-error {
+.sesnap-notice-error {
     background: #f8d7da;
     border-color: #dc3545;
     color: #721c24;
 }
 
-.ptdm-notice-warning {
+.sesnap-notice-warning {
     background: #fff3cd;
     border-color: #ffc107;
     color: #856404;
 }
 
 /* Hover Effects */
-.ptdm-table-container tbody tr:hover {
+.sesnap-table-container tbody tr:hover {
     background-color: #f9f9f9;
 }
 
-.ptdm-export-section .button:hover {
+.sesnap-export-section .button:hover {
     transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Focus States */
-.ptdm-export-section .button:focus {
+.sesnap-export-section .button:focus {
     outline: 2px solid #0073aa;
     outline-offset: 2px;
 }
 
 /* Print Styles */
 @media print {
-    .ptdm-export-section,
+    .sesnap-export-section,
     .nav-tab-wrapper {
         display: none;
     }
     
-    .ptdm-table-container {
+    .sesnap-table-container {
         border: none;
         box-shadow: none;
     }
     
-    .ptdm-table-container th {
+    .sesnap-table-container th {
         background: #f0f0f0 !important;
         color: #000 !important;
     }

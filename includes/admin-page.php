@@ -2,11 +2,11 @@
 /**
  * Admin Page Handler
  *
- * @package PluginThemeDashboardManager
+ * @package SiteExtensionsSnapshot
  * @since 1.0.0
  */
 
-// Prevent direct access
+// Prevent direct access.
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class PTDM_Admin_Page {
+class Sesnap_Admin_Page {
 
     /**
      * Constructor
@@ -55,26 +55,26 @@ class PTDM_Admin_Page {
         }
 
         wp_enqueue_style(
-            'ptdm-admin-styles',
-            PTDM_PLUGIN_URL . 'assets/css/admin-styles.css',
+            'sesnap-admin-styles',
+            SESNAP_PLUGIN_URL . 'assets/css/admin-styles.css',
             array(),
-            PTDM_VERSION
+            SESNAP_VERSION
         );
 
         wp_enqueue_script(
-            'ptdm-admin-scripts',
-            PTDM_PLUGIN_URL . 'assets/js/admin-scripts.js',
+            'sesnap-admin-scripts',
+            SESNAP_PLUGIN_URL . 'assets/js/admin-scripts.js',
             array( 'jquery' ),
-            PTDM_VERSION,
+            SESNAP_VERSION,
             true
         );
 
         wp_localize_script(
-            'ptdm-admin-scripts',
-            'ptdm_ajax',
+            'sesnap-admin-scripts',
+            'sesnap_ajax',
             array(
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
-                'nonce'    => wp_create_nonce( 'ptdm_export_nonce' ),
+                'nonce'    => wp_create_nonce( 'sesnap_export_nonce' ),
                 'strings'  => array(
                     'exporting' => __( 'Exporting...', 'site-extensions-snapshot' ),
                     'error'     => __( 'An error occurred. Please try again.', 'site-extensions-snapshot' ),
@@ -103,11 +103,11 @@ class PTDM_Admin_Page {
         $requested_tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : '';
         $tab_nonce = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
 
-        if ( $requested_tab && in_array( $requested_tab, $allowed_tabs, true ) && wp_verify_nonce( $tab_nonce, 'ptdm_admin_tab' ) ) {
+        if ( $requested_tab && in_array( $requested_tab, $allowed_tabs, true ) && wp_verify_nonce( $tab_nonce, 'sesnap_admin_tab' ) ) {
             $current_tab = $requested_tab;
         }
 
-        $tab_nonce = wp_create_nonce( 'ptdm_admin_tab' );
+        $tab_nonce = wp_create_nonce( 'sesnap_admin_tab' );
         $plugins_tab_url = add_query_arg(
             array(
                 'page'     => 'site-extensions-snapshot',
@@ -133,19 +133,19 @@ class PTDM_Admin_Page {
                 <?php esc_html_e( 'View and manage all installed plugins and themes. Export the complete list to CSV for documentation purposes.', 'site-extensions-snapshot' ); ?>
             </p>
 
-            <div class="ptdm-export-section">
+            <div class="sesnap-export-section">
                 <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-                    <?php wp_nonce_field( 'ptdm_export_csv', 'ptdm_export_nonce' ); ?>
-                    <input type="hidden" name="action" value="ptdm_export_csv">
+                    <?php wp_nonce_field( 'sesnap_export_csv', 'sesnap_export_nonce' ); ?>
+                    <input type="hidden" name="action" value="sesnap_export_csv">
                     <button type="submit" class="button button-primary">
                         <span class="dashicons dashicons-download"></span>
                         <?php esc_html_e( 'Export to CSV', 'site-extensions-snapshot' ); ?>
                     </button>
                 </form>
 
-                <div class="ptdm-search-wrap">
+                <div class="sesnap-search-wrap">
                     <span class="dashicons dashicons-search" aria-hidden="true"></span>
-                    <input type="search" class="ptdm-search" placeholder="<?php echo esc_attr__( 'Search plugins and themes...', 'site-extensions-snapshot' ); ?>" />
+                    <input type="search" class="sesnap-search" placeholder="<?php echo esc_attr__( 'Search plugins and themes...', 'site-extensions-snapshot' ); ?>" />
                 </div>
             </div>
 
@@ -153,16 +153,16 @@ class PTDM_Admin_Page {
                 <a href="<?php echo esc_url( $plugins_tab_url ); ?>" 
                    class="nav-tab <?php echo esc_attr( 'plugins' === $current_tab ? 'nav-tab-active' : '' ); ?>">
                     <?php esc_html_e( 'Plugins', 'site-extensions-snapshot' ); ?>
-                    <span class="ptdm-count"><?php echo esc_html( count( $this->get_plugins_data() ) ); ?></span>
+                    <span class="sesnap-count"><?php echo esc_html( count( $this->get_plugins_data() ) ); ?></span>
                 </a>
                 <a href="<?php echo esc_url( $themes_tab_url ); ?>" 
                    class="nav-tab <?php echo esc_attr( 'themes' === $current_tab ? 'nav-tab-active' : '' ); ?>">
                     <?php esc_html_e( 'Themes', 'site-extensions-snapshot' ); ?>
-                    <span class="ptdm-count"><?php echo esc_html( count( $this->get_themes_data() ) ); ?></span>
+                    <span class="sesnap-count"><?php echo esc_html( count( $this->get_themes_data() ) ); ?></span>
                 </a>
             </nav>
 
-            <div class="ptdm-content">
+            <div class="sesnap-content">
                 <?php if ( 'plugins' === $current_tab ) : ?>
                     <?php $this->display_plugins_table(); ?>
                 <?php else : ?>
@@ -181,7 +181,7 @@ class PTDM_Admin_Page {
     private function display_plugins_table() {
         $plugins = $this->get_plugins_data();
         ?>
-        <div class="ptdm-table-container">
+        <div class="sesnap-table-container">
             <table class="wp-list-table widefat fixed striped">
                 <thead>
                     <tr>
@@ -205,7 +205,7 @@ class PTDM_Admin_Page {
                                 </td>
                                 <td><?php echo esc_html( $plugin['version'] ); ?></td>
                                 <td>
-                                    <span class="ptdm-status ptdm-status-<?php echo esc_attr( $plugin['status'] ); ?>">
+                                    <span class="sesnap-status sesnap-status-<?php echo esc_attr( $plugin['status'] ); ?>">
                                         <?php echo esc_html( $plugin['status'] ); ?>
                                     </span>
                                 </td>
@@ -228,7 +228,7 @@ class PTDM_Admin_Page {
     private function display_themes_table() {
         $themes = $this->get_themes_data();
         ?>
-        <div class="ptdm-table-container">
+        <div class="sesnap-table-container">
             <table class="wp-list-table widefat fixed striped">
                 <thead>
                     <tr>
@@ -252,7 +252,7 @@ class PTDM_Admin_Page {
                                 </td>
                                 <td><?php echo esc_html( $theme['version'] ); ?></td>
                                 <td>
-                                    <span class="ptdm-status ptdm-status-<?php echo esc_attr( $theme['status'] ); ?>">
+                                    <span class="sesnap-status sesnap-status-<?php echo esc_attr( $theme['status'] ); ?>">
                                         <?php echo esc_html( $theme['status'] ); ?>
                                     </span>
                                 </td>
@@ -303,7 +303,7 @@ class PTDM_Admin_Page {
          * @since 1.0.0
          * @param array $plugins_data Array of plugins data.
          */
-        return apply_filters( 'ptdm_plugins_data', $plugins_data );
+        return apply_filters( 'sesnap_plugins_data', $plugins_data );
     }
 
     /**
@@ -338,7 +338,7 @@ class PTDM_Admin_Page {
          * @since 1.0.0
          * @param array $themes_data Array of themes data.
          */
-        return apply_filters( 'ptdm_themes_data', $themes_data );
+        return apply_filters( 'sesnap_themes_data', $themes_data );
     }
 }
 
