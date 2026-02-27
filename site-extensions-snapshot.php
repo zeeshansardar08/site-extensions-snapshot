@@ -51,9 +51,6 @@ class Site_Extensions_Snapshot {
      * @since 1.0.0
      */
     public function init() {
-        // Load text domain.
-        load_plugin_textdomain( 'site-extensions-snapshot', false, dirname( SESNAP_PLUGIN_BASENAME ) . '/languages' );
-
         // Load required files.
         $this->load_dependencies();
 
