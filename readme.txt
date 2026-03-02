@@ -49,7 +49,7 @@ Only users with the `manage_options` capability.
 No. It only reads installed plugin and theme data and provides a CSV export.
 
 = What data is stored? =
-Only a single activation timestamp option is stored (`sesnap_activated`). No external requests are made.
+Only a single activation timestamp option is stored (`siteexsn_activated`). No external requests are made.
 
 == Screenshots ==
 

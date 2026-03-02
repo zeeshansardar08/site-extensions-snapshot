@@ -14,7 +14,7 @@
  * Tested up to: 6.9
  * Requires PHP: 7.4
  *
- * @package SiteExtensionsSnapshot
+ * @package Siteexsn
  * @since 1.0.0
  */
 
@@ -24,17 +24,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants
-define( 'SESNAP_VERSION', '1.0.0' );
-define( 'SESNAP_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'SESNAP_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'SESNAP_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'SITEEXSN_VERSION', '1.0.0' );
+define( 'SITEEXSN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'SITEEXSN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'SITEEXSN_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 /**
  * Main Plugin Class
  *
  * @since 1.0.0
  */
-class Site_Extensions_Snapshot {
+class Siteexsn_Main {
 
     /**
      * Constructor
@@ -66,8 +66,8 @@ class Site_Extensions_Snapshot {
      * @since 1.0.0
      */
     private function load_dependencies() {
-        require_once SESNAP_PLUGIN_DIR . 'includes/admin-page.php';
-        require_once SESNAP_PLUGIN_DIR . 'includes/csv-export.php';
+        require_once SITEEXSN_PLUGIN_DIR . 'includes/admin-page.php';
+        require_once SITEEXSN_PLUGIN_DIR . 'includes/csv-export.php';
     }
 
     /**
@@ -76,8 +76,8 @@ class Site_Extensions_Snapshot {
      * @since 1.0.0
      */
     private function init_admin() {
-        new Sesnap_Admin_Page();
-        new Sesnap_CSV_Export();
+        new Siteexsn_Admin_Page();
+        new Siteexsn_CSV_Export();
     }
 
 
@@ -92,8 +92,30 @@ class Site_Extensions_Snapshot {
             return;
         }
 
+        // Migrate legacy options from old prefix.
+        self::migrate_legacy_options();
+
         // Add activation timestamp.
-        add_option( 'sesnap_activated', time() );
+        add_option( 'siteexsn_activated', time() );
+    }
+
+    /**
+     * Migrate legacy options from the old sesnap_ prefix to siteexsn_.
+     *
+     * @since 1.1.0
+     */
+    private static function migrate_legacy_options() {
+        $legacy_map = array(
+            'sesnap_activated' => 'siteexsn_activated',
+        );
+
+        foreach ( $legacy_map as $old_key => $new_key ) {
+            $old_value = get_option( $old_key );
+            if ( false !== $old_value && false === get_option( $new_key ) ) {
+                update_option( $new_key, $old_value );
+                delete_option( $old_key );
+            }
+        }
     }
 
     /**
@@ -110,11 +132,11 @@ class Site_Extensions_Snapshot {
 }
 
 // Initialize the plugin.
-$sesnap_plugin = new Site_Extensions_Snapshot();
+$siteexsn_plugin = new Siteexsn_Main();
 
 // Register activation and deactivation hooks.
-register_activation_hook( __FILE__, array( 'Site_Extensions_Snapshot', 'activate' ) );
-register_deactivation_hook( __FILE__, array( 'Site_Extensions_Snapshot', 'deactivate' ) ); 
+register_activation_hook( __FILE__, array( 'Siteexsn_Main', 'activate' ) );
+register_deactivation_hook( __FILE__, array( 'Siteexsn_Main', 'deactivate' ) ); 
 
 
 

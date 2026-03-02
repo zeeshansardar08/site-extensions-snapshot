@@ -2,7 +2,7 @@
 /**
  * CSV Export Handler
  *
- * @package SiteExtensionsSnapshot
+ * @package Siteexsn
  * @since 1.0.0
  */
 
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class Sesnap_CSV_Export {
+class Siteexsn_CSV_Export {
 
     /**
      * Constructor
@@ -24,8 +24,8 @@ class Sesnap_CSV_Export {
      * @since 1.0.0
      */
     public function __construct() {
-        add_action( 'admin_post_sesnap_export_csv', array( $this, 'handle_csv_export' ) );
-        add_action( 'wp_ajax_sesnap_export_csv', array( $this, 'handle_ajax_csv_export' ) );
+        add_action( 'admin_post_siteexsn_export_csv', array( $this, 'handle_csv_export' ) );
+        add_action( 'wp_ajax_siteexsn_export_csv', array( $this, 'handle_ajax_csv_export' ) );
     }
 
     /**
@@ -40,7 +40,7 @@ class Sesnap_CSV_Export {
         }
 
         // Verify nonce.
-        if ( ! isset( $_POST['sesnap_export_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['sesnap_export_nonce'] ) ), 'sesnap_export_csv' ) ) {
+        if ( ! isset( $_POST['siteexsn_export_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['siteexsn_export_nonce'] ) ), 'siteexsn_export_csv' ) ) {
             wp_die( esc_html__( 'Security check failed.', 'site-extensions-snapshot' ) );
         }
 
@@ -59,7 +59,7 @@ class Sesnap_CSV_Export {
         }
 
         // Verify nonce.
-        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'sesnap_export_nonce' ) ) {
+        if ( ! isset( $_POST['nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['nonce'] ) ), 'siteexsn_export_nonce' ) ) {
             wp_send_json_error( esc_html__( 'Security check failed.', 'site-extensions-snapshot' ) );
         }
 
@@ -73,7 +73,7 @@ class Sesnap_CSV_Export {
      */
     private function generate_csv() {
         // Get data.
-        $admin_page = new Sesnap_Admin_Page();
+        $admin_page = new Siteexsn_Admin_Page();
         $plugins_data = $admin_page->get_plugins_data();
         $themes_data = $admin_page->get_themes_data();
 
@@ -122,7 +122,7 @@ class Sesnap_CSV_Export {
          * @param array $plugins_data Plugins data.
          * @param array $themes_data  Themes data.
          */
-        $csv_data = apply_filters( 'sesnap_csv_data', $csv_data, $plugins_data, $themes_data );
+        $csv_data = apply_filters( 'siteexsn_csv_data', $csv_data, $plugins_data, $themes_data );
 
         // Generate filename.
         $filename = 'site-extensions-snapshot_' . gmdate( 'Y-m-d_H-i-s' ) . '.csv';
@@ -149,7 +149,7 @@ class Sesnap_CSV_Export {
      * @return array
      */
     public function get_csv_data() {
-        $admin_page = new Sesnap_Admin_Page();
+        $admin_page = new Siteexsn_Admin_Page();
         $plugins_data = $admin_page->get_plugins_data();
         $themes_data = $admin_page->get_themes_data();
 
@@ -197,7 +197,7 @@ class Sesnap_CSV_Export {
          * @param array $plugins_data Plugins data.
          * @param array $themes_data  Themes data.
          */
-        return apply_filters( 'sesnap_csv_data', $csv_data, $plugins_data, $themes_data );
+        return apply_filters( 'siteexsn_csv_data', $csv_data, $plugins_data, $themes_data );
     }
 
     /**
