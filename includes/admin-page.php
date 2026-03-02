@@ -2,7 +2,7 @@
 /**
  * Admin Page Handler
  *
- * @package SiteExtensionsSnapshot
+ * @package Siteexsn
  * @since 1.0.0
  */
 
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class Sesnap_Admin_Page {
+class Siteexsn_Admin_Page {
 
     /**
      * Constructor
@@ -55,26 +55,26 @@ class Sesnap_Admin_Page {
         }
 
         wp_enqueue_style(
-            'sesnap-admin-styles',
-            SESNAP_PLUGIN_URL . 'assets/css/admin-styles.css',
+            'siteexsn-admin-styles',
+            SITEEXSN_PLUGIN_URL . 'assets/css/admin-styles.css',
             array(),
-            SESNAP_VERSION
+            SITEEXSN_VERSION
         );
 
         wp_enqueue_script(
-            'sesnap-admin-scripts',
-            SESNAP_PLUGIN_URL . 'assets/js/admin-scripts.js',
+            'siteexsn-admin-scripts',
+            SITEEXSN_PLUGIN_URL . 'assets/js/admin-scripts.js',
             array( 'jquery' ),
-            SESNAP_VERSION,
+            SITEEXSN_VERSION,
             true
         );
 
         wp_localize_script(
-            'sesnap-admin-scripts',
-            'sesnap_ajax',
+            'siteexsn-admin-scripts',
+            'siteexsn_ajax',
             array(
                 'ajax_url' => admin_url( 'admin-ajax.php' ),
-                'nonce'    => wp_create_nonce( 'sesnap_export_nonce' ),
+                'nonce'    => wp_create_nonce( 'siteexsn_export_nonce' ),
                 'strings'  => array(
                     'exporting' => __( 'Exporting...', 'site-extensions-snapshot' ),
                     'error'     => __( 'An error occurred. Please try again.', 'site-extensions-snapshot' ),
@@ -103,11 +103,11 @@ class Sesnap_Admin_Page {
         $requested_tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : '';
         $tab_nonce = isset( $_GET['_wpnonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ) : '';
 
-        if ( $requested_tab && in_array( $requested_tab, $allowed_tabs, true ) && wp_verify_nonce( $tab_nonce, 'sesnap_admin_tab' ) ) {
+        if ( $requested_tab && in_array( $requested_tab, $allowed_tabs, true ) && wp_verify_nonce( $tab_nonce, 'siteexsn_admin_tab' ) ) {
             $current_tab = $requested_tab;
         }
 
-        $tab_nonce = wp_create_nonce( 'sesnap_admin_tab' );
+        $tab_nonce = wp_create_nonce( 'siteexsn_admin_tab' );
         $plugins_tab_url = add_query_arg(
             array(
                 'page'     => 'site-extensions-snapshot',
@@ -133,19 +133,19 @@ class Sesnap_Admin_Page {
                 <?php esc_html_e( 'View and manage all installed plugins and themes. Export the complete list to CSV for documentation purposes.', 'site-extensions-snapshot' ); ?>
             </p>
 
-            <div class="sesnap-export-section">
+            <div class="siteexsn-export-section">
                 <form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
-                    <?php wp_nonce_field( 'sesnap_export_csv', 'sesnap_export_nonce' ); ?>
-                    <input type="hidden" name="action" value="sesnap_export_csv">
+                    <?php wp_nonce_field( 'siteexsn_export_csv', 'siteexsn_export_nonce' ); ?>
+                    <input type="hidden" name="action" value="siteexsn_export_csv">
                     <button type="submit" class="button button-primary">
                         <span class="dashicons dashicons-download"></span>
                         <?php esc_html_e( 'Export to CSV', 'site-extensions-snapshot' ); ?>
                     </button>
                 </form>
 
-                <div class="sesnap-search-wrap">
+                <div class="siteexsn-search-wrap">
                     <span class="dashicons dashicons-search" aria-hidden="true"></span>
-                    <input type="search" class="sesnap-search" placeholder="<?php echo esc_attr__( 'Search plugins and themes...', 'site-extensions-snapshot' ); ?>" />
+                    <input type="search" class="siteexsn-search" placeholder="<?php echo esc_attr__( 'Search plugins and themes...', 'site-extensions-snapshot' ); ?>" />
                 </div>
             </div>
 
@@ -153,16 +153,16 @@ class Sesnap_Admin_Page {
                 <a href="<?php echo esc_url( $plugins_tab_url ); ?>" 
                    class="nav-tab <?php echo esc_attr( 'plugins' === $current_tab ? 'nav-tab-active' : '' ); ?>">
                     <?php esc_html_e( 'Plugins', 'site-extensions-snapshot' ); ?>
-                    <span class="sesnap-count"><?php echo esc_html( count( $this->get_plugins_data() ) ); ?></span>
+                    <span class="siteexsn-count"><?php echo esc_html( count( $this->get_plugins_data() ) ); ?></span>
                 </a>
                 <a href="<?php echo esc_url( $themes_tab_url ); ?>" 
                    class="nav-tab <?php echo esc_attr( 'themes' === $current_tab ? 'nav-tab-active' : '' ); ?>">
                     <?php esc_html_e( 'Themes', 'site-extensions-snapshot' ); ?>
-                    <span class="sesnap-count"><?php echo esc_html( count( $this->get_themes_data() ) ); ?></span>
+                    <span class="siteexsn-count"><?php echo esc_html( count( $this->get_themes_data() ) ); ?></span>
                 </a>
             </nav>
 
-            <div class="sesnap-content">
+            <div class="siteexsn-content">
                 <?php if ( 'plugins' === $current_tab ) : ?>
                     <?php $this->display_plugins_table(); ?>
                 <?php else : ?>
@@ -181,7 +181,7 @@ class Sesnap_Admin_Page {
     private function display_plugins_table() {
         $plugins = $this->get_plugins_data();
         ?>
-        <div class="sesnap-table-container">
+        <div class="siteexsn-table-container">
             <table class="wp-list-table widefat fixed striped">
                 <thead>
                     <tr>
@@ -205,7 +205,7 @@ class Sesnap_Admin_Page {
                                 </td>
                                 <td><?php echo esc_html( $plugin['version'] ); ?></td>
                                 <td>
-                                    <span class="sesnap-status sesnap-status-<?php echo esc_attr( $plugin['status'] ); ?>">
+                                    <span class="siteexsn-status siteexsn-status-<?php echo esc_attr( $plugin['status'] ); ?>">
                                         <?php echo esc_html( $plugin['status'] ); ?>
                                     </span>
                                 </td>
@@ -228,7 +228,7 @@ class Sesnap_Admin_Page {
     private function display_themes_table() {
         $themes = $this->get_themes_data();
         ?>
-        <div class="sesnap-table-container">
+        <div class="siteexsn-table-container">
             <table class="wp-list-table widefat fixed striped">
                 <thead>
                     <tr>
@@ -252,7 +252,7 @@ class Sesnap_Admin_Page {
                                 </td>
                                 <td><?php echo esc_html( $theme['version'] ); ?></td>
                                 <td>
-                                    <span class="sesnap-status sesnap-status-<?php echo esc_attr( $theme['status'] ); ?>">
+                                    <span class="siteexsn-status siteexsn-status-<?php echo esc_attr( $theme['status'] ); ?>">
                                         <?php echo esc_html( $theme['status'] ); ?>
                                     </span>
                                 </td>
@@ -303,7 +303,7 @@ class Sesnap_Admin_Page {
          * @since 1.0.0
          * @param array $plugins_data Array of plugins data.
          */
-        return apply_filters( 'sesnap_plugins_data', $plugins_data );
+        return apply_filters( 'siteexsn_plugins_data', $plugins_data );
     }
 
     /**
@@ -338,7 +338,7 @@ class Sesnap_Admin_Page {
          * @since 1.0.0
          * @param array $themes_data Array of themes data.
          */
-        return apply_filters( 'sesnap_themes_data', $themes_data );
+        return apply_filters( 'siteexsn_themes_data', $themes_data );
     }
 }
 

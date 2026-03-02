@@ -2,7 +2,7 @@
 /**
  * Uninstall Site Extensions Snapshot
  *
- * @package SiteExtensionsSnapshot
+ * @package Siteexsn
  * @since 1.0.0
  */
 
@@ -16,7 +16,10 @@ if ( ! current_user_can( 'activate_plugins' ) ) {
     return;
 }
 
-// Delete plugin options.
+// Delete plugin options (current prefix).
+delete_option( 'siteexsn_activated' );
+
+// Delete legacy options (old prefix) if they still exist.
 delete_option( 'sesnap_activated' ); 
 
 
