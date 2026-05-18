@@ -4,7 +4,7 @@ Tags: plugins, themes, dashboard, export, csv
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,7 +17,10 @@ Site Extensions Snapshot adds a Tools page that lists all installed plugins and 
 Key features:
 
 * Plugins and themes overview with status
-* CSV export of plugins and themes
+* At-a-glance stats cards (total, active, inactive, updates available) that adapt to the current tab
+* Filter chips to quickly switch between All / Active / Inactive / Update Available
+* "Update Available" badge on items with a pending update
+* CSV export of plugins and themes (now includes an Update Available column)
 * Search and sortable columns
 * Keyboard shortcuts for export and tab switching
 
@@ -58,10 +61,23 @@ Only a single activation timestamp option is stored (`siteexsn_activated`). No e
 
 == Changelog ==
 
+= 1.1.0 =
+* New: Stats cards showing total, active, inactive and updates-available counts (counts adapt to the selected tab).
+* New: Filter chips for All / Active / Inactive / Update Available, combined with the existing search.
+* New: "Update Available" badge in plugin and theme rows.
+* New: "Update Available" column in CSV export.
+* Improvement: Use is_plugin_active() for multisite-safe active-state detection.
+* Improvement: Cache plugins/themes data per request to avoid duplicate work on page render.
+* Improvement: Scope sortable-table JS to the plugin's own list table so other admin tables are not affected.
+* Improvement: Don't hijack keyboard shortcuts while typing in inputs.
+
 = 1.0.0 =
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.1.0 =
+* Adds stats cards, filter chips, update-available badges, and an Update Available column in the CSV export.
 
 = 1.0.0 =
 * Initial release.
