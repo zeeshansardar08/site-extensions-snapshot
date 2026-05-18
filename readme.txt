@@ -56,8 +56,9 @@ Only a single activation timestamp option is stored (`siteexsn_activated`). No e
 
 == Screenshots ==
 
-1. Plugins tab overview.
-2. Themes tab overview.
+1. Plugins overview with stats cards, filter chips, and update indicators.
+2. Themes tab with status, update detection, and CSV export.
+3. At-a-glance stats: total, active, inactive, and updates available.
 
 == Changelog ==
 
