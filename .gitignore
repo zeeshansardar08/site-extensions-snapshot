@@ -1,0 +1,26 @@
+# AI assistant / tooling directories.
+# Note: these are not shipped to wp.org SVN, but Plugin Check still flags them
+# if the directory is present in the plugin folder on disk.
+.claude/
+.cursor/
+
+# Editors and IDEs.
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS cruft.
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Dependencies (not used today, ignored so they never get committed by accident).
+node_modules/
+vendor/
+
+# Local scratch files.
+*.log
+*.bak
+*.orig
+*~
