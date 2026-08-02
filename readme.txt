@@ -2,9 +2,9 @@
 Contributors: zeeshansardar08
 Tags: plugins, themes, dashboard, export, csv
 Requires at least: 6.0
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,11 @@ Only a single activation timestamp option is stored (`siteexsn_activated`). No e
 
 == Changelog ==
 
+= 1.1.1 =
+* Compatibility: Tested with WordPress 7.0.
+* Improvement: Accent colours now follow the active admin colour scheme, so the dashboard matches the new "Modern" default admin theme in WordPress 7.0 (and every other scheme) instead of using a fixed blue.
+* Improvement: Clearer keyboard focus styles on the filter chips and search field.
+
 = 1.1.0 =
 * New: Stats cards showing total, active, inactive and updates-available counts (counts adapt to the selected tab).
 * New: Filter chips for All / Active / Inactive / Update Available, combined with the existing search.
@@ -76,6 +81,9 @@ Only a single activation timestamp option is stored (`siteexsn_activated`). No e
 * Initial release.
 
 == Upgrade Notice ==
+
+= 1.1.1 =
+* WordPress 7.0 compatible. The dashboard now follows your admin colour scheme, including the new "Modern" default.
 
 = 1.1.0 =
 * Adds stats cards, filter chips, update-available badges, and an Update Available column in the CSV export.

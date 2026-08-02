@@ -1,9 +1,21 @@
 ﻿/**
  * Site Extensions Snapshot - Admin Styles
  *
+ * Accent colours follow the active admin colour scheme via --wp-admin-theme-color
+ * so the UI matches core in WordPress 7.0 (Modern) and every other scheme.
+ * The hard-coded fallbacks keep older installs looking unchanged.
+ *
  * @package Siteexsn
  * @since 1.0.0
  */
+
+.siteexsn-stats,
+.siteexsn-filter-chips,
+.siteexsn-export-section,
+.siteexsn-table-container {
+    --siteexsn-accent: var(--wp-admin-theme-color, #2271b1);
+    --siteexsn-accent-rgb: var(--wp-admin-theme-color--rgb, 34, 113, 177);
+}
 
 /* Stats Cards */
 .siteexsn-stats {
@@ -16,7 +28,7 @@
 .siteexsn-stat-card {
     background: #fff;
     border: 1px solid #ccd0d4;
-    border-left: 4px solid #2271b1;
+    border-left: 4px solid var(--siteexsn-accent);
     border-radius: 4px;
     padding: 14px 16px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
@@ -32,7 +44,7 @@
     font-size: 28px;
     width: 28px;
     height: 28px;
-    color: #2271b1;
+    color: var(--siteexsn-accent);
 }
 
 .siteexsn-stat-value {
@@ -82,13 +94,18 @@
 
 .siteexsn-chip:hover {
     background: #fff;
-    border-color: #2271b1;
-    color: #2271b1;
+    border-color: var(--siteexsn-accent);
+    color: var(--siteexsn-accent);
+}
+
+.siteexsn-chip:focus-visible {
+    outline: var(--wp-admin-border-width-focus, 2px) solid var(--siteexsn-accent);
+    outline-offset: 1px;
 }
 
 .siteexsn-chip.is-active {
-    background: #2271b1;
-    border-color: #2271b1;
+    background: var(--siteexsn-accent);
+    border-color: var(--siteexsn-accent);
     color: #fff;
 }
 
@@ -170,7 +187,12 @@
 }
 
 .siteexsn-search-wrap .dashicons {
-    color: #2271b1;
+    color: var(--siteexsn-accent);
+}
+
+.siteexsn-search-wrap:focus-within {
+    border-color: var(--siteexsn-accent);
+    box-shadow: 0 0 0 var(--wp-admin-border-width-focus, 1px) var(--siteexsn-accent);
 }
 
 .siteexsn-search-wrap .siteexsn-search {
@@ -324,7 +346,7 @@
     height: 20px;
     margin: -10px 0 0 -10px;
     border: 2px solid #f3f3f3;
-    border-top: 2px solid #0073aa;
+    border-top: 2px solid var(--siteexsn-accent, #2271b1);
     border-radius: 50%;
     animation: siteexsn-spin 1s linear infinite;
 }
@@ -372,7 +394,7 @@
 
 /* Focus States */
 .siteexsn-export-section .button:focus {
-    outline: 2px solid #0073aa;
+    outline: var(--wp-admin-border-width-focus, 2px) solid var(--siteexsn-accent);
     outline-offset: 2px;
 }
 

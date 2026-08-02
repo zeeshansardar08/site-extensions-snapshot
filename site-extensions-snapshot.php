@@ -3,7 +3,7 @@
  * Plugin Name: Site Extensions Snapshot
  * Plugin URI:  https://wordpress.org/plugins/site-extensions-snapshot/
  * Description: A comprehensive dashboard to view and export all installed plugins and themes with their status information.
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Zignites
  * Author URI: https://zignites.com
  * License: GPL v2 or later
@@ -11,7 +11,7 @@
  * Text Domain: site-extensions-snapshot
  * Domain Path: /languages
  * Requires at least: 6.0
- * Tested up to: 6.9
+ * Tested up to: 7.0
  * Requires PHP: 7.4
  *
  * @package Siteexsn
@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Define plugin constants
-define( 'SITEEXSN_VERSION', '1.1.0' );
+define( 'SITEEXSN_VERSION', '1.1.1' );
 define( 'SITEEXSN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SITEEXSN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'SITEEXSN_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
